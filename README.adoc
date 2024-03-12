@@ -1,6 +1,6 @@
 # quarkus-langchain4j experimentation
 
-
+image::images/quarkus-langchain4j-jchateau.png[]
 
 This project is an experimentation of the  https://docs.quarkiverse.io/quarkus-langchain4j/dev/index.html[quarksu-langchain4j] extension. It aims at studying how to leverage LLMs (impressive) capabilities in Java applications.
 
