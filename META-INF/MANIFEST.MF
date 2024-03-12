@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Class-Path:  lib/boot/org.jboss.logging.jboss-logging-3.5.3.Final.jar li
+ b/boot/io.smallrye.common.smallrye-common-os-2.1.2.jar lib/boot/io.quar
+ kus.quarkus-development-mode-spi-3.6.6.jar lib/boot/org.jboss.logmanage
+ r.jboss-logmanager-3.0.4.Final.jar lib/boot/io.smallrye.common.smallrye
+ -common-constraint-2.1.2.jar lib/boot/io.smallrye.common.smallrye-commo
+ n-cpu-2.1.2.jar lib/boot/io.smallrye.common.smallrye-common-expression-
+ 2.1.2.jar lib/boot/io.smallrye.common.smallrye-common-function-2.1.2.ja
+ r lib/boot/io.smallrye.common.smallrye-common-net-2.1.2.jar lib/boot/io
+ .smallrye.common.smallrye-common-ref-2.1.2.jar lib/boot/io.quarkus.quar
+ kus-bootstrap-runner-3.6.6.jar lib/boot/io.smallrye.common.smallrye-com
+ mon-io-2.1.2.jar lib/boot/io.github.crac.org-crac-0.1.3.jar lib/boot/io
+ .quarkus.quarkus-vertx-latebound-mdc-provider-3.6.6.jar
+Main-Class: io.quarkus.bootstrap.runner.QuarkusEntryPoint
+Implementation-Title: quarkus-langchain4j-demo
+Implementation-Version: 1.0
+
