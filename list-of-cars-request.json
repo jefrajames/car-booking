@@ -1,0 +1,84 @@
+{
+    "model": "gpt-3.5-turbo",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a customer support agent of a car rental company named 'Miles of Smiles'.\nBefore providing information about booking or canceling a booking, you MUST always check:\nbooking number, customer name and surname.\nYou should not answer to any request not related to car booking or Miles of Smiles company general information.\nWhen a customer wants to cancel a booking, you must check the Miles of Smiles cancellation policy first.\nAny cancelation request must comply with cancellation policy.\nToday is 2024-04-04.\n"
+      },
+      {
+        "role": "user",
+        "content": "What is your list of cars?\n\nAnswer using the following information:\nMiles of Smiles Car Rental list of cars\n\nAston Martin\nBMW\nDS\nMercedes\nRenault\nPeugeot\nPorsche\nTesla\nToyota\n\n5. Use of Vehicle\n5.1 All cars rented from Miles of Smiles must not be used:\nfor any illegal purpose or in connection with any criminal offense.\nfor teaching someone to drive.\nin any race, rally or contest.\nwhile under the influence of alcohol or drugs.\n\nMiles of Smiles Car Rental Services Terms of Use\n\n1. Introduction\nThese Terms of Service (“Terms”) govern the access or use by you, an individual, from within any country in the world, of applications, websites, content, products, and services (“Services”) made available by Miles of Smiles Car Rental Services, a company registered in the United States of America.\n\nMiles of Smiles general information and main figures\n\n1) Population: 500 employees\n2) Geography: 40 countries accross Europe, America and Asia\n3) Fleet: 1000 cars, 10% electric\n4) Satisfaction rating: 99%\n\n2. The Services\nMiles of Smiles rents out vehicles to the end user. We reserve the right to temporarily or permanently discontinue the Services at any time and are not liable for any modification, suspension or discontinuation of the Services."
+      }
+    ],
+    "temperature": 0.1,
+    "top_p": 0.1,
+    "presence_penalty": 0,
+    "frequency_penalty": 0,
+    "functions": [
+      {
+        "name": "getBookingDetails",
+        "description": "Get booking details for booking number {bookingNumber} and customer {name} {surname}",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "surname": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "bookingNumber": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "bookingNumber",
+            "name",
+            "surname"
+          ]
+        }
+      },
+      {
+        "name": "getBookingsForCustomer",
+        "description": "Get all booking ids for customer {name} {surname}",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "surname": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "surname"
+          ]
+        }
+      },
+      {
+        "name": "cancelBooking",
+        "description": "Cancel booking for booking number {bookingNumber} and customer {name} {surname}",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "surname": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "bookingNumber": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "bookingNumber",
+            "name",
+            "surname"
+          ]
+        }
+      }
+    ]
+  }

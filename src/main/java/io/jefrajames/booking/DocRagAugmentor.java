@@ -12,6 +12,7 @@ import dev.langchain4j.rag.content.retriever.ContentRetriever;
 import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
 import dev.langchain4j.rag.query.Query;
 import dev.langchain4j.store.embedding.EmbeddingStore;
+import io.quarkus.logging.Log;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -52,12 +53,11 @@ public class DocRagAugmentor implements Supplier<RetrievalAugmentor> {
         @Override
         public List<Content> retrieve(Query query) {
             List<Content> contents = retriever.retrieve(query);
-            // Uncomment to see the retrieved contents
-            // Log.debug(String.format("DEMO: Found %d relevant contents for query <%s>", contents.size(), query.text()));
-            // contents.forEach(c -> {
-            //     Log.debug(String.format("DEMO: content from file_name %s is <<%s>>",
-            //             c.textSegment().metadata("file_name"), c.textSegment().text()));
-            // });
+            Log.debug(String.format("DEMO: Found %d relevant contents for query <%s>", contents.size(), query.text()));
+            contents.forEach(c -> {
+                Log.debug(String.format("DEMO: content from file_name %s is <<%s>>",
+                        c.textSegment().metadata("file_name"), c.textSegment().text().substring(0, 30)+ "..."));
+            });
             return contents;
         }
 

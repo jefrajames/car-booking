@@ -88,7 +88,7 @@ Documents must first be ingested: their content is turned into a vectorial repre
 
 Upon each request, text segments are selected and appended to the user message according to their semantic proximity with the request.
 
-In this projecct:
+In this project:
 
 * 4 text documents are ingested (in docs-for-rag directory). One of them is a an apple pie recipe which has nothing to do with car booking, it is interesting to test the retrieval selectivity
 * Ingestion is performed at application startup (see DocRagIngestor class)
@@ -216,14 +216,17 @@ quarkus.langchain4j.azure-openai.chat-model.top-p=0.1
 
 To test the application, you can enter the following user messages (see ChatAiServiceTest and FraudAiServiceTest to get some inspiration):
 
-* What is your role?
+* Hello, how can you help me?
 * What is your list of cars?
 * What is your cancelation policy?
-* What is your fleet size? Be short please?
-* How many electric cars?
+* What is your fleet size? Be short please.
+* How many electric cars do you have?
 * My name is James Bond, please list my bookings
-* My name is James Bond, is my booking 123-456 cancelable?
-* My name is James Bond, can you cancel my booking 234-567?
+* Is my booking 123-456 cancelable?
+* Is my booking 234-567 cancelable?
+* Can you check the duration please?
+* I'm James Bond, can I cancel all my booking 345-678?
+* Can you provide the details of all my bookings?
 * fraud James Bond
 * fraud Emilio Largo
 

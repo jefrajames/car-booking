@@ -17,7 +17,7 @@ public class BookingService {
     private static final Map<String, Booking> BOOKINGS = new HashMap<>();
     static {
         // James Bond: hero customer!
-        BOOKINGS.put("123-456", new Booking("123-456", LocalDate.now().plusDays(1), LocalDate.now().plusDays(2),
+        BOOKINGS.put("123-456", new Booking("123-456", LocalDate.now().plusDays(1), LocalDate.now().plusDays(7),
                 new Customer("James", "Bond"), false, "Aston Martin")); // Not cancelable: too late
         BOOKINGS.put("234-567", new Booking("234-567", LocalDate.now().plusDays(10), LocalDate.now().plusDays(12),
                 new Customer("James", "Bond"), false, "Renault")); // Not cancelable: too short

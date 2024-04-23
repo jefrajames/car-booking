@@ -39,7 +39,8 @@ public interface FraudAiService {
                         - the customer-name key set to {name}
                         - the customer-surname key set to {surname}
                         - the fraud-detected key set to 'true' or 'false'
-                        - In case of fraud, the explanation of the fraud in the fraud-explanation key.
+                        - in case of fraud, the explanation of the fraud in the fraud-explanation key
+                        - in case of fraud, the reservation ids that overlap.
                         You must respond in a valid JSON format.
 
                         You must not wrap JSON response in backticks, markdown, or in any other way, but return it as plain text.
@@ -50,7 +51,7 @@ public interface FraudAiService {
         FraudResponse detectFraudForCustomer(String name, String surname);
 
         default FraudResponse fraudFallback(String name, String surname) {
-                return new FraudResponse(name, surname, false,
+                throw new RuntimeException(
                                 "Sorry, I am not able to detect fraud for customer " + name + " " + surname
                                                 + " at the moment. Please try again later.");
         }
