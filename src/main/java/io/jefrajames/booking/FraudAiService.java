@@ -21,10 +21,11 @@ public interface FraudAiService {
                         Your task is to detect whether a fraud was committed for the customer {{name}} {{surname}}.
 
                         To detect a fraud, perform the following actions:
-                        1 - Retrieve all bookings for the customer {{name}} {{surname}}.
-                        2 - Determine if there is an overlap between several bookings.
-                        3 - If there is an overlap, a fraud is detected.
-                        4 - If a fraud is detected, return the fraud status and the bookings that overlap.
+                        1 - Retrieve all bookings for the customer with name {{name}} and surname {{surname}}.
+                        2 - If there is no booking, return the fraud status as 'false'.
+                        3 - Otherwise, Determine if there is an overlap between several bookings.
+                        4 - If there is an overlap, a fraud is detected.
+                        5 - If a fraud is detected, return the fraud status and the bookings that overlap.
 
                         A booking overlap (and hence a fraud) occurs when there are several bookings for a given date.
                         For instance:

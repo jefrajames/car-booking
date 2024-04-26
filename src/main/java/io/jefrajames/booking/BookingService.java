@@ -40,14 +40,16 @@ public class BookingService {
         return booking;
     }
 
-    @Tool("Get booking details for booking number {bookingNumber} and customer {name} {surname}")
+    // @Tool("Get booking details for booking number {bookingNumber} and customer {name} {surname}")
+    @Tool("Get booking details given a booking number and customer name and surname")
     public Booking getBookingDetails(String bookingNumber, String name, String surname) {
         Log.info("DEMO: Calling Tool-getBookingDetails: " + bookingNumber + " and customer: "
                 + name + " " + surname);
         return checkBookingExists(bookingNumber, name, surname);
     }
 
-    @Tool("Get all booking ids for customer {name} {surname}")
+    // @Tool("Get all booking ids for customer {name} {surname}")
+    @Tool("Get all booking ids for a customer given his name and surname")
     public List<String> getBookingsForCustomer(String name, String surname) {
         Log.info("DEMO: Calling Tool-getBookingsForCustomer: " + name + " " + surname);
         Customer customer = new Customer(name, surname);
@@ -73,7 +75,8 @@ public class BookingService {
 
     }
 
-    @Tool("Cancel booking for booking number {bookingNumber} and customer {name} {surname}")
+    // @Tool("Cancel booking for booking number {bookingNumber} and customer {name} {surname}")
+    @Tool("Cancel a booking given its booking number and customer name and surname")
     public Booking cancelBooking(String bookingNumber, String name, String surname) {
         Log.info("DEMO: Calling Tool-cancelBooking " + bookingNumber + " and customer: " + name
                 + " " + surname);
