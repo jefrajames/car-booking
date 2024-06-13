@@ -25,8 +25,10 @@ public class DocRagAugmentor implements Supplier<RetrievalAugmentor> {
     @Inject
     EmbeddingModel model;
 
+    // Todo: how many times is called that method? Once or severall? 
     @Override
     public RetrievalAugmentor get() {
+        Log.info("DEMO: DocRagAugmentor.get() called");
         return DefaultRetrievalAugmentor
                 .builder()
                 .contentRetriever(new MyDocRetriever(store, model))
@@ -56,7 +58,7 @@ public class DocRagAugmentor implements Supplier<RetrievalAugmentor> {
             Log.debug(String.format("DEMO: Found %d relevant contents for query <%s>", contents.size(), query.text()));
             contents.forEach(c -> {
                 Log.debug(String.format("DEMO: content from file_name %s is <<%s>>",
-                        c.textSegment().metadata("file_name"), c.textSegment().text().substring(0, 30)+ "..."));
+                c.textSegment().metadata().getString("file_name"), c.textSegment().text().substring(0, 30)+ "..."));
             });
             return contents;
         }

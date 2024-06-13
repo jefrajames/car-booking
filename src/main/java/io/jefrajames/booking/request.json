@@ -1,0 +1,84 @@
+{
+    "model": "gpt-3.5-turbo",
+    "messages": [
+        {
+            "role": "system",
+            "content": "You are a customer support agent of a car rental company named 'Miles of Smiles'.\nBefore providing information about booking or canceling a booking, you MUST always check:\nbooking number, customer name and surname.\nYou should not answer to any request not related to car booking or Miles of Smiles company general information.\nWhen a customer wants to cancel a booking, you must check his name and the Miles of Smiles cancellation policy first.\nAny cancelation request must comply with cancellation policy both for the delay and the duration.\nToday is 2024-05-13.\n"
+        },
+        {
+            "role": "user",
+            "content": "My name is James Bond, what are my reservations\n\nAnswer using the following information:\n3. Bookings\n3.1 Users may make a booking through our website or mobile application.\n3.2 You must provide accurate, current and complete information during the reservation process. You are responsible for all charges incurred under your account.\n3.3 All bookings are subject to vehicle availability.\n\n4. Cancellation Policy\n4.1 Reservations lasting less than three days cannot be cancelled\n4.2 Reservations can be cancelled up to 7 days prior to the start of the booking period."
+        }
+    ],
+    "temperature": 0.1,
+    "top_p": 0.1,
+    "presence_penalty": 0.0,
+    "frequency_penalty": 0.0,
+    "functions": [
+        {
+            "name": "getBookingDetails",
+            "description": "Get booking details given a booking number and customer name and surname",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "surname": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "bookingNumber": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "bookingNumber",
+                    "name",
+                    "surname"
+                ]
+            }
+        },
+        {
+            "name": "getBookingsForCustomer",
+            "description": "Get all booking ids for a customer given his name and surname",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "surname": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "surname"
+                ]
+            }
+        },
+        {
+            "name": "cancelBooking",
+            "description": "Cancel a booking given its booking number and customer name and surname",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "surname": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "bookingNumber": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "bookingNumber",
+                    "name",
+                    "surname"
+                ]
+            }
+        }
+    ]
+}

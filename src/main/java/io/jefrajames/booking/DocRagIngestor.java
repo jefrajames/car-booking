@@ -44,7 +44,8 @@ public class DocRagIngestor {
 
         long start = System.currentTimeMillis();
 
-        DocumentSplitter splitter = DocumentSplitters.recursive(500, 0);
+        // Warning: maxSegmenSizeInChars should be <= embedding model dimensions (384)
+        DocumentSplitter splitter = DocumentSplitters.recursive(384, 0);
 
         EmbeddingStoreIngestor ingestor = EmbeddingStoreIngestor.builder()
                 .embeddingStore(embeddingStore)

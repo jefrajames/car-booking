@@ -1,0 +1,51 @@
+{
+    "choices": [
+        {
+            "content_filter_results": {},
+            "finish_reason": "function_call",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+                "content": null,
+                "function_call": {
+                    "arguments": "{\"surname\":\"Bond\",\"name\":\"James\"}",
+                    "name": "getBookingsForCustomer"
+                },
+                "role": "assistant"
+            }
+        }
+    ],
+    "created": 1715610610,
+    "id": "chatcmpl-9OQyowFo5vTj2nfwBWOQOoAxgS2Uk",
+    "model": "gpt-4",
+    "object": "chat.completion",
+    "prompt_filter_results": [
+        {
+            "prompt_index": 0,
+            "content_filter_results": {
+                "hate": {
+                    "filtered": false,
+                    "severity": "safe"
+                },
+                "self_harm": {
+                    "filtered": false,
+                    "severity": "safe"
+                },
+                "sexual": {
+                    "filtered": false,
+                    "severity": "safe"
+                },
+                "violence": {
+                    "filtered": false,
+                    "severity": "safe"
+                }
+            }
+        }
+    ],
+    "system_fingerprint": "fp_2f57f81c11",
+    "usage": {
+        "completion_tokens": 21,
+        "prompt_tokens": 366,
+        "total_tokens": 387
+    }
+}

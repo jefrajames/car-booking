@@ -4,12 +4,12 @@ image::images/quarkus-langchain4j-jchateau.png[]
 
 This project is an experimentation of the  https://docs.quarkiverse.io/quarkus-langchain4j/dev/index.html[quarksu-langchain4j] extension. It aims at studying how to leverage LLMs (impressive) capabilities in Java applications.
 
-I've used it to illustrate my talk at https://www.jchateau.org[Chateau 2024 unconference].
+I've used it to illustrate my talks at https://www.jchateau.org[Chateau 2024 unconference] and https://www.youtube.com/watch?v=48xQdS7o3JU[ParisJUG].
 
-It is based on a simplified car booking application inspired from the https://www.youtube.com/watch?v=BD1MSLbs9KE[Java meets AI] talk from Liz Raes at Devoxx Belgium 2023. The car booking company is called "Miles of Smiles" and the application exposes two AI services:
+It is based on a simplified car booking application inspired from the https://www.youtube.com/watch?v=BD1MSLbs9KE[Java meets AI] talk from Lize Raes at Devoxx Belgium 2023. The car booking company is called "Miles of Smiles" and the application exposes two AI services:
 
 . a chat service to freely discuss with a customer assistant
-. a fraud service to determine if a customer is a frauder.
+. a fraud service to determine whether a customer is a frauder.
 
 For the sake of simplicity, there is no database interaction, the application is standalone and can be used "as is". Of course thanks to Quarkus, it can  easily be extended according to your needs.
 
@@ -19,18 +19,18 @@ The application works in command mode with a @QuarkusMain class (see CustomerSup
 
 When the application is launched, interaction is done from the keyboard (User message prompt):
 
-* enter __bye__ to exit
 * enter __fraud <name> <surname>__ to detect a fraud for a customer
-* any other text is considered as a request for the bot.
+* any other text is considered as a request for the bot
+* enter __bye__ to exit the application.
 
 ## Technical context
 
 The project has been developped and tested with:
 
-. Java 21.0.2 (Temurin OpenJDK distro)
-. GraalVM CE 21.0.2
+. Java 22 (Temurin OpenJDK distro)
+. GraalVM CE 22.0.2
 . Maven 3.9.5
-. Testing against GPT 3.5 and 4.0 on a dedicated Azure instance (to be customized according to your context).
+. tested with GPT 3-5-turbo, 4 and 4o on a dedicated Azure instance in my company (to be customized according to your context).
 
 
 ## Environment variables (configuration)
@@ -39,9 +39,6 @@ The following environment variables have been set up to run the application and 
 
 * QUARKUS_LANGCHAIN4J_AZURE_OPENAI_API_KEY
 * QUARKUS_LANGCHAIN4J_AZURE_OPENAI_ENDPOINT
-* QUARKUS_LANGCHAIN4J_AZURE_OPENAI_RESOURCE_NAME
-* QUARKUS_LANGCHAIN4J_AZURE_OPENAI_DEPLOYMENT_NAME
-* QUARKUS_LANGCHAIN4J_AZURE_OPENAI_API_VERSION
 
 Other parameters are defined in application.properties.
 
@@ -49,16 +46,16 @@ For a detailed description see https://docs.quarkiverse.io/quarkus-langchain4j/d
 
 ## Packaging the application
 
-To package in JVM mode: __mvn package__
+In JVM mode: __mvn package__
 
-To package in native mode: __mvn package -Pnative -DskipTests__
+In native mode: __mvn package -Pnative -DskipTests__
 
 ## Running the application
 
-To run in dev mode :
+In dev mode:
 
-* with quarkus command: _quarkus dev_
-* with Maven: __mvn quarkus:dev__
+* using quarkus command: _quarkus dev_
+* using Maven: __mvn quarkus:dev__
 
 To run tests: __mvn test__.
 
@@ -84,7 +81,7 @@ Let's investigate them...
 
 RAG consists in augmenting the LLM with specific knowledge coming from different data sources: text, PDF, CSV ....
 
-Documents must first be ingested: their content is turned into a vectorial representation (using a local model) and stored in a vector database (in memory, pgsql, Croma etc ...). This process is usually done in batch mode.
+Documents must first be ingested: their content is turned into a vectorial representation (using an embedding model) and stored in a vector database (in memory, pgsql, Croma etc ...). This process is usually done in batch mode.
 
 Upon each request, text segments are selected and appended to the user message according to their semantic proximity with the request.
 
@@ -118,7 +115,7 @@ During my tests, it appears that the default value (0.5) is not selective enough
 
 ## Function calling
 
-Function calling consists in asking the LLM to call our business logic... which is both powerful and dangerous! It is not supported by all models. Reminder: this project has been tested with Azure OpenAI 3.5/4.0.
+Function calling consists in asking the LLM to call our business logic... which is both powerful and dangerous! It is not supported by all models.
 
 ### Declaring callable functions
 
@@ -212,6 +209,9 @@ quarkus.langchain4j.azure-openai.chat-model.temperature=0.1
 quarkus.langchain4j.azure-openai.chat-model.top-p=0.1
 ----
 
+For more information see
+https://community.openai.com/t/cheat-sheet-mastering-temperature-and-top-p-in-chatgpt-api/172683[Mastering Temperature and Top_p in ChatGPT API]
+
 ## Playing with the application
 
 To test the application, you can enter the following user messages (see ChatAiServiceTest and FraudAiServiceTest to get some inspiration):
@@ -234,21 +234,22 @@ To understand the dynamic of the application, some key log messages are prefixed
 
 ## Feedback
 
-The application has been tested with Azure OpenAI 3.5 and 4.0.
+According to my tests, GPT 3-5-turbo is fast but not enough reliable and accurate to properly act as customer support It is subject to hallucinations. It doesn't hesitate to invent response. For instance, when asking about SUV and diesel cars, it answers positively although it has no information about it.
 
-In my context, OpenAI 3.5 has proved to be much faster while providing sufficiently consistent answers in most cases.
+GPT-4 is more reliable and accurate but about 6 times slower.
 
-The LLM behavior regarding booking cancelation has been the less consistent during my tests. Even by knowing the cancelation policy (provided in an embedding document), it doesn't hesitate to depart from it claiming that a reservation is cancelable when it is not or even trying to cancel it directly.  It can probably be improved with an https://docs.quarkiverse.io/quarkus-langchain4j/dev/prompt-engineering.html[improved prompt engineering technique]. 
+GPT-4o is even more reliable than GPT-4 and as fast as GPT-3-5-turbo. So clearly, it is technically the best option.
 
-Last but not least, keep in mind that LLMs do not hesitate to invent responses. For instance, when you ask for diesel or SUV, although it has not the information, the LLM doesn't hesitate to answer positively.
+Warning: pricing must also be considered when choosing a model in production. 
 
 ## Next steps
 
 To be investigated:
 
-* Testability
-* Observability
-* Fault tolerance
+* Security: how to secure Function Callings
+* Testability: how to go beyond just "true or false"
+* Observability: how to monitor the LLM behavior/quality
 * Auditability
 * Parallel function calling
-* Production readiness.
+* Production readiness
+* Quarkus native mode (currently not working)

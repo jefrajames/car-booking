@@ -1,6 +1,7 @@
 package io.jefrajames.booking;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ public class FraudAiServiceTest {
         final String userMessage = "fraud James Bond";
         final FraudResponse response = fraudAiService.detectFraudForCustomer("James", "Bond");
         System.out.println(userMessage + " => " + response);
-        assertTrue(response.fraudDetected()==false);
+        assertFalse(response.fraudDetected());
     }
 
     @Test
@@ -26,7 +27,7 @@ public class FraudAiServiceTest {
         final String userMessage = "fraud Emilio Largo";
         final FraudResponse response = fraudAiService.detectFraudForCustomer("Emilio", "Largo");
         System.out.println(userMessage + " => " + response);
-        assertTrue(response.fraudDetected()==true);
+        assertTrue(response.fraudDetected());
     }
     
 }

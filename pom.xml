@@ -19,10 +19,11 @@
       0.10.2 depends on quarkus 3.8.2 and langchain4j 0.29.1 (as of 2024-04-02)
       0.11.1 depends on quarkus 3.8.2 and langchain4j 0.30.0 (as of 2024-04-23)
       0.12.1 depends on quarkus 3.8.2 and langchain4j 0.30.0 (as of 2024-04-26)
+      0.15.1 depends on quarkus 3.8.2 and langchain4j 0.31.0 (as of 2024-04-26)
     -->
-    <quarkus.langchain4j.version>0.12.1</quarkus.langchain4j.version>
+    <quarkus.langchain4j.version>0.15.1</quarkus.langchain4j.version>
     <quarkus.platform.version>3.8.2</quarkus.platform.version>
-    <langchain4j.version>0.30.0</langchain4j.version>
+    <langchain4j.version>0.31.0</langchain4j.version>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.1.2</surefire-plugin.version>
   </properties>
